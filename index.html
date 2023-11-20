@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from chat.shuttleai.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Nov 2023 19:19:03 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0">
+<meta name="description" content="A conversational AI system that listens, learns, and challenges">
+<meta property="og:title" content="ShuttleAI">
+<meta property="og:image" content="/assets/img/favicon.ico">
+<meta property="og:description" content="A conversational AI system that listens, learns, and challenges">
+<meta property="og:url" content="https://chat.shuttle.rip">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.html">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.html">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.html">
+<link rel="manifest" href="assets/img/site.webmanifest">
+<script src="assets/js/icons.js" type="f98511914650a0100dc51cd3-text/javascript"></script>
+<script src="assets/js/sec.html" type="f98511914650a0100dc51cd3-text/javascript"></script>
+<script src="assets/js/highlightjs-copy.min.js" type="f98511914650a0100dc51cd3-text/javascript"></script>
+<script src="assets/js/chat.js" defer type="f98511914650a0100dc51cd3-text/javascript"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/markdown-it%4013.0.1/dist/markdown-it.min.js" type="f98511914650a0100dc51cd3-text/javascript"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release%4011.7.0/build/styles/base16/dracula.min.css">
+<script type="f98511914650a0100dc51cd3-text/javascript">
+            const user_image        = `<img src="assets/img/user.png">`;
+            const gpt_image         = `<img src="assets/img/gpt.png">`;
+        </script>
+<style>
+            .hljs {
+                color: #e9e9f4;
+                background: #28293629;
+                border-radius: var(--border-radius-1);
+                border: 1px solid var(--blur-border);
+                font-size: 15px;
+            }
+
+            #message-input {
+                margin-right: 30px;
+                height: 80px;
+            }
+
+            #message-input::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            /* Track */
+            #message-input::-webkit-scrollbar-track {
+                background: #f1f1f1; 
+            }
+            
+            /* Handle */
+            #message-input::-webkit-scrollbar-thumb {
+                background: #c7a2ff; 
+            }
+
+            /* Handle on hover */
+            #message-input::-webkit-scrollbar-thumb:hover {
+                background: #8b3dff; 
+            }
+        </style>
+<script src="assets/js/highlight.min.js" type="f98511914650a0100dc51cd3-text/javascript"></script>
+<script type="f98511914650a0100dc51cd3-text/javascript">window.conversation_id = `5c65c0f1-8e48-eb4f-7ce1-188e422aad2`</script>
+<title>ShuttleAI</title>
+</head>
+<body>
+
+<div class="gradient"></div>
+<div class="row">
+<div class="box conversations" id="sidebar">
+<div class="top">
+<button class="new_convo" onclick="if (!window.__cfRLUnblockHandlers) return false; new_conversation()" data-cf-modified-f98511914650a0100dc51cd3->
+<i class="fa-regular fa-plus"></i>
+<span>New Chat</span>
+</button>
+</div>
+<div class="bottom_buttons">
+<button onclick="if (!window.__cfRLUnblockHandlers) return false; delete_conversations()" data-cf-modified-f98511914650a0100dc51cd3->
+<i class="fa-regular fa-trash"></i>
+<span>Clear Conversations</span>
+</button>
+<div class="info">
+<i class="fa-brands fa-discord"></i>
+<span class="convo-title">discord: <a href="https://discord.com/invite/shuttleai">shuttleai</a><br>
+</span>
+</div>
+<div class="info">
+<i class="fa-regular fa-circle-info"></i>
+<span class="convo-title">
+version: 2 beta<br>
+release: 2023-11-19<br>
+</span>
+</div>
+
+</div>
+</div>
+<div class="conversation">
+<div class="stop_generating stop_generating-hidden">
+<button id="cancelButton">
+<span>Stop Generating</span>
+<i class="fa-regular fa-stop"></i>
+</button>
+</div>
+<div class="box" id="messages">
+</div>
+<div class="user-input">
+<div class="box input-box">
+<textarea id="message-input" placeholder="Ask a question" cols="30" rows="10" style="white-space: pre-wrap;resize: none;"></textarea>
+<div id="send-button">
+<i class="fa-solid fa-paper-plane-top"></i>
+</div>
+</div>
+</div>
+<div class="buttons">
+
+<div class="field">
+<select name="model" id="model">
+<option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+<option value="gpt-4">gpt-4</option>
+<option value="claude-instant">claude instant</option>
+</select>
+</div>
+<div class="field">
+<select name="jailbreak" id="jailbreak">
+<option value="default" selected>None</option>
+<option value="gpt-math-1.0">math 1.0</option>
+<option value="gpt-dude-1.0">dude 1.0</option>
+<option value="gpt-dan-1.0">dan 1.0</option>
+<option value="gpt-dan-2.0">dan 2.0</option>
+<option value="gpt-dev-2.0">dev 2.0</option>
+<option value="gpt-evil-1.0">evil 1.0</option>
+</select>
+</div>
+<div class="field">
+<select name="personality" id="personality">
+<option value="default" selected>None</option>
+<option value="dating">Dating </option>
+</select>
+</div>
+<div class="field">
+<input type="text" id="api-key" placeholder="ShuttleAI Key" />
+</div>
+<form class="color-picker" action>
+<fieldset>
+<legend class="visually-hidden">Pick a color scheme</legend>
+<label for="light" class="visually-hidden">Light</label>
+<input type="radio" name="theme" id="light" checked>
+<label for="pink" class="visually-hidden">Pink theme</label>
+<input type="radio" id="pink" name="theme">
+<label for="blue" class="visually-hidden">Blue theme</label>
+<input type="radio" id="blue" name="theme">
+<label for="green" class="visually-hidden">Green theme</label>
+<input type="radio" id="green" name="theme">
+<label for="dark" class="visually-hidden">Dark theme</label>
+<input type="radio" id="dark" name="theme">
+</fieldset>
+</form>
+</div>
+</div>
+</div>
+
+</div>
+<div class="mobile-sidebar">
+<i class="fa-solid fa-bars"></i>
+</div>
+<script type="f98511914650a0100dc51cd3-text/javascript">
+// window.addEventListener('load', function () {
+//     const modal = document.getElementById("releaseNotesModal");
+//     const closeButton = document.getElementsByClassName("close")[0];
+
+//     if(modal && closeButton) {
+//         modal.style.display = "block";
+
+//         closeButton.onclick = function () {
+//             modal.style.display = "none";
+//         }
+
+//         window.onclick = function (event) {
+//             if (event.target == modal) {
+//                 modal.style.display = "none";
+//             }
+//         }
+//     }
+// });
+</script></body>
+
+<!-- Mirrored from chat.shuttleai.app/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 20 Nov 2023 19:19:08 GMT -->
+</html>
